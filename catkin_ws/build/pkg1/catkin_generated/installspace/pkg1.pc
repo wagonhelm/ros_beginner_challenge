@@ -1,8 +1,0 @@
-prefix=/home/justin/gits/rostest/catkin_ws/install
-
-Name: pkg1
-Description: Description of pkg1
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/justin/gits/rostest/catkin_ws/install/lib 
-Requires: 

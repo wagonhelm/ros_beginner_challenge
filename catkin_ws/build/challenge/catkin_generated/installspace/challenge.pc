@@ -1,0 +1,8 @@
+prefix=/home/justin/gits/rosttest/catkin_ws/install
+
+Name: challenge
+Description: Description of challenge
+Version: 0.0.0
+Cflags: -I/home/justin/gits/rosttest/catkin_ws/install/include
+Libs: -L/home/justin/gits/rosttest/catkin_ws/install/lib 
+Requires: 
