@@ -1,25 +1,44 @@
 import rospy
 from std_msgs.msg import Int32
 
+class Node1():
+    
+    
+    def __init__(self):
+        
+        self.pub = rospy.Publisher('node1', Int32, queue_size=10)
+        self.sub = rospy.Subscriber('node2', Int32, self.callback)
+        rospy.init_node('node1')
 
-def talker():
-    pub = rospy.Publisher('chatter', Int32, queue_size=10)
-    rospy.init_node('sender')
-    add = 0
-    while not rospy.is_shutdown():
+
+    def callback(self, data):
+        rospy.loginfo(rospy.get_caller_id() + "\nReceived {} from node2" \
+                                               .format(data.data))
+        print("Enter a number to add to {} and send back to node2".format(data.data))
+        data.data += self.get_number()
+        self.pub.publish(data.data)
+
+
+    def get_number(self):
         while True:
             try:
                 number = int(input("Enter a number between 1-1000: "))
-                assert number in range(1, 1001), "Seriously..."
+                assert number in range(1, 1001), "Seriously?"
             except Exception as e:
                 print(e)
             else:
                 break
-        added_number = add + number
-        # rospy.loginfo(added_number)
-        pub.publish(added_number)
-        rospy.Rate(1).sleep()
+        return number
 
 
+    def run_node(self):
+        number = self.get_number()
+        self.pub.publish(number)
+        while not rospy.is_shutdown():
+            self.sub
+            rospy.Rate(1).sleep()
+           
+        
 if __name__ == "__main__":
-    talker()
+    node1 = Node1()
+    node1.run_node()
